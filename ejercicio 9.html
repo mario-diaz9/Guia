@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Conversión de Temperatura</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light d-flex justify-content-center align-items-center mt-5">
+
+    <div class="card p-4 shadow" style="max-width: 400px; width: 100%;">
+        <h4 class="text-center mb-3 text-primary">Conversor de Temperatura</h4>
+
+        <form id="formulario">
+            <div class="mb-3">
+                <label for="celsius" class="form-label">Temperatura en Celsius:</label>
+                <input type="number" class="form-control" id="celsius" placeholder="Ej: 25" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success">Convertir</button>
+            </div>
+        </form>
+
+        <div id="resultado" ></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById("formulario").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const celsius = parseFloat(document.getElementById("celsius").value);
+            const fahrenheit = (celsius * 9 / 5) + 32;
+            let mensaje = "";
+
+            if (fahrenheit >= 14 && fahrenheit < 32) {
+                mensaje = "Temperatura baja";
+                const resultado = document.getElementById("resultado");
+                resultado.classList.remove("d-none");
+                resultado.innerHTML = `
+                <div class="mt-4 alert alert-primary ">
+                <strong>Temperatura en Fahrenheit:</strong> ${fahrenheit.toFixed(2)} °F<br>
+                <strong>Estado:</strong> ${mensaje} </div>`;
+
+            } else if (fahrenheit >= 32 && fahrenheit < 68) {
+                mensaje = "Temperatura adecuada";
+                const resultado = document.getElementById("resultado");
+                resultado.classList.remove("d-none");
+                resultado.innerHTML = `
+                <div class="mt-4 alert alert-success ">
+                <strong>Temperatura en Fahrenheit:</strong> ${fahrenheit.toFixed(2)} °F<br>
+                <strong>Estado:</strong> ${mensaje} </div>`;
+
+            } else if (fahrenheit >= 68 && fahrenheit <= 96) {
+                mensaje = "Temperatura alta";
+                const resultado = document.getElementById("resultado");
+                resultado.classList.remove("d-none");
+                resultado.innerHTML = `
+                <div class="mt-4 alert alert-danger ">
+                <strong>Temperatura en Fahrenheit:</strong> ${fahrenheit.toFixed(2)} °F<br>
+                <strong>Estado:</strong> ${mensaje} </div>`;
+
+            } else {
+                mensaje = "Temperatura desconocida";
+                const resultado = document.getElementById("resultado");
+                resultado.classList.remove("d-none");
+                resultado.innerHTML = `
+                <div class="mt-4 alert alert-dark ">
+                <strong>Temperatura en Fahrenheit:</strong> ${fahrenheit.toFixed(2)} °F<br>
+                <strong>Estado:</strong> ${mensaje} </div>`;
+            }
+
+
+      
+            });
+    </script>
+
+</body>
+
+</html>
